@@ -29,8 +29,8 @@ def add_row_in_sheet(values):
 
      # If it's a fresh sheet (only headers), optionally write header
      if last_row == 0:
-     sheet.update(range_name="A1:C1", values=[["Name", "Price", "Quantity"]])
-     last_row = 1  # Next data starts at row 2
+          sheet.update(range_name="A1:C1", values=[["Name", "Price", "Quantity"]])
+          last_row = 1  # Next data starts at row 2
 
      # Now write new values starting from the next row
      range_to_update = f"A{last_row + 1}:C{last_row + len(values)}"
