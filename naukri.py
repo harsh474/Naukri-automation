@@ -1,7 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.keys import Keys 
+from Connect_tutorial_sheet import add_row_in_sheet
 import time
 
 # Update with your credentials
@@ -51,7 +52,11 @@ def apply_to_job(link):
         time.sleep(4)
 
         try:
-            apply_button = driver.find_element(By.XPATH, "//button[contains(text(),'Apply')]")
+            apply_button = driver.find_element(By.XPATH, "//button[contains(text(),'Apply')]") 
+            if "apply on company site" in page_text.lower() or popup_found:
+                    write_to_google_sheet(job_link, company_name, today_date)
+                    close_tab()
+            
             apply_button.click()
             time.sleep(4)
             
