@@ -51,8 +51,11 @@ def send_linkedin_message(profile_id: str, message: str):
     return response.json()
 
 # FastAPI Endpoint
-@app.post("/send-referral/")
-def send_referral(profile_url: str, name: str = "there", company: str = "your company"):
+@app.get("/send-referral/")
+def send_referral(): 
+    profile_url= "https://www.linkedin.com/in/dhakad22klx/" 
+    name="Deepak Dhakad"
+    company ="Bitwise"
     try:
         profile_id = get_linkedin_profile_id(profile_url)
         if not profile_id:
@@ -67,3 +70,14 @@ def send_referral(profile_url: str, name: str = "there", company: str = "your co
 
     except Exception as e:
         return {"error": str(e)}
+
+
+
+    
+import { UnipileClient } from "unipile-node-sdk";
+
+const client = new UnipileClient('https://{YOUR_DSN}', '{YOUR_ACCESS_TOKEN}');
+
+await client.account.connectLinkedIn({ '****' });
+
+const messages = await client.messaging.getAllMessages();
