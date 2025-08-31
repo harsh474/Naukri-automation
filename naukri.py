@@ -10,7 +10,8 @@ import os
 # Update with your credentials
 EMAIL = "harshrajput1101@gmail.com"
 PASSWORD = "vDX9#qK8K.uvY4f"
-JOB_URL = "https://www.naukri.com/react-dot-js-react-developer-jobs?k=react.js%2C%20react%20developer&nignbevent_src=jobsearchDeskGNB&experience=1&jobAge=1&functionAreaIdGid=5&ctcFilter=6to10&glbl_qcrc=1028"
+# JOB_URL = "https://www.naukri.com/react-dot-js-react-developer-jobs?k=react.js%2C%20react%20developer&nignbevent_src=jobsearchDeskGNB&experience=1&jobAge=1&functionAreaIdGid=5&ctcFilter=6to10&glbl_qcrc=1028"
+JOB_URL = "https://www.naukri.com/react-js-developer-jobs?k=react%20js%20developer&nignbevent_src=jobsearchDeskGNB"
 COOKIE_FILE = "naukri_cookies.pkl"
 
 # Setup Chrome
@@ -86,7 +87,7 @@ def apply_to_job(link):
             if apply_button:
                 apply_button.click()
                 time.sleep(7)
-                insert_job_profile(company_name, job_role, "NA", "Need to found")
+                # insert_job_profile(company_name, job_role, "NA", "Need to found")
 
                 if len(driver.find_elements(By.CLASS_NAME, "qna-title")) > 0:
                     print("Question popup found. Closing tab.")
@@ -110,10 +111,10 @@ def apply_to_job(link):
                 if new_tab:
                     driver.switch_to.window(new_tab)
                     time.sleep(3)
-                    career_page_link = driver.current_url
-                    print("Company site link:", career_page_link)
+                    job_link = driver.current_url
+                    print("Company site link:", job_link)
 
-                    insert_job_profile(company_name, job_role, career_page_link, "Available")
+                    insert_job_profile(company_name, job_role, job_link)
 
                     # ✅ Close company site tab and return
                     driver.close()

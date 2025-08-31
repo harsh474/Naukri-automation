@@ -2,7 +2,7 @@ import imaplib
 import email
 from email.header import decode_header
 import time,re
-
+from database.insert_operation import update_connection_status
 # Gmail credentials (use app password, not your normal Gmail password)
 EMAIL = "harshrajput1101@gmail.com"
 PASSWORD = "azrl vgyj urvp pgal"
@@ -68,7 +68,7 @@ def check_unseen_emails():
     if not email_ids:
         print("No new LinkedIn emails.")
         return
-
+    employees=[]
     for e_id in email_ids[:2]:
         status, msg_data = mail.fetch(e_id, "(RFC822)")
         msg = email.message_from_bytes(msg_data[0][1])
@@ -77,12 +77,15 @@ def check_unseen_emails():
         name = extract_name(msg.get("From", ""))
 
         # LinkedIn URL from HTML body
-        profile_url = extract_linkedin_url(msg)
-
+        linkedin_link = extract_linkedin_url(msg)
+        employees.append({name,linkedin_link})
         print("\n👤 Name:", name if name else "Not Found")
-        print("🔗 LinkedIn URL:", profile_url if profile_url else "Not Found")
+        print("🔗 LinkedIn URL:", linkedin_link if linkedin_link else "Not Found")
+    
+    update_connection_status(employees)
+    time.sleep(12) 
 
     mail.logout()
 
-if __name__ == "__main__":
-    check_unseen_emails()
+# if __name__ == "__main__":
+#     check_unseen_emails()

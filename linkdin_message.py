@@ -4,18 +4,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys   
 from selenium.webdriver.support.ui import WebDriverWait
-from database.insert_operation import insert_employee
+from database.insert_operation import get_job_profile_employee
 from webdriver_manager.chrome import ChromeDriverManager
 import time,pickle,os
 from selenium.webdriver.support import expected_conditions as EC
-
+from database.insert_operation import update_job_profile
 
 
 # Credentials
-EMAIL = "2020kuec2050@iiitkota.ac.in"
-# EMAIL = "harshrajput1101@gmail.com"
-
-# PASSWORD = "HAR@Sh1101"
+# EMAIL = "2020kuec2050@iiitkota.ac.in"
+EMAIL = "harshrajput1101@gmail.com"
+PASSWORD = "HAR@Sh1101"
 LINKEDIN_URL="https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin"
 
 
@@ -68,10 +67,15 @@ def login_linkedin():
 
 
 
-def open_employee_url_message():
+def open_employee_url_message(company,job_role,job_link,employee_name,employee_linkdin_url):
 
         # step1 open this employee_linkdin_url in browswer add some dealy to load page 
-        employee_linkdin_url = "https://www.linkedin.com/in/dhakad22klx/"    
+        # employee_linkdin_url = "https://www.linkedin.com/in/dhakad22klx/"     
+         
+        if not company or not job_role or not job_link or not employee_name or not employee_linkdin_url : 
+            print("Don't one but value is missing in open_employee_url_message ") 
+            return
+
         driver.get(employee_linkdin_url) 
 
         # WebDriverWait(driver,10)
@@ -84,8 +88,6 @@ def open_employee_url_message():
             # WebDriverWait(driver,10)  
             
             time.sleep(20)
-            message_button_CSS_SELECTOR = ".VIyKyZZuBhznEXwJnvQbbGJYNEEmXXaayX"  
-            # message_button = driver.find_elements(By.CSS_SELECTOR,message_button_CSS_SELECTOR)  
             message_button = driver.find_elements(By.XPATH,"//button[contains(@aria-label, 'Message Deepak')]")
             print("message_button is clicked",message_button) 
             print("type of message button",type(message_button)) 
@@ -117,8 +119,10 @@ def open_employee_url_message():
 
 
             message_box_element[0].send_keys(referral_template)
-            time.sleep(4) 
-            WebDriverWait(driver,4)
+            time.sleep(8) 
+            
+            # change referal_status 
+            update_job_profile(job_link)
         except Exception as e:
             print("Error while targeting element as ",e)
 
@@ -150,13 +154,17 @@ def main():
         # First time login
         login_linkedin()
         save_cookies()
-
-    open_employee_url_message() 
     
+    result = get_job_profile_employee()  
+    if result['status']: 
+        company,job_role,job_link,employees = result['data']
+        for employee in employees : 
+         open_employee_url_message(company,job_role,job_link,employee['name'], employee['linkedin_link']) 
+        
     driver.quit()
 
 
-if __name__ == "__main__":
-    main() 
+# if __name__ == "__main__":
+#     main() 
    
 

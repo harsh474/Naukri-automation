@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "selenium": "^2.20.0",
-    "sqlite3": "^5.1.7"
-  }
-}
