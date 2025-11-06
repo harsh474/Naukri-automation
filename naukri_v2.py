@@ -9,8 +9,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-# --- CONFIG ---
-JOB_URL = "https://www.naukri.com/react-dot-js-react-developer-jobs?k=react.js%2C%20react%20developer&nignbevent_src=jobsearchDeskGNB&experience=1&jobAge=1&functionAreaIdGid=5&ctcFilter=6to10&glbl_qcrc=1028"
+# --- CONFIG --- 
+# mern job url
+# JOB_URL = "https://www.naukri.com/react-dot-js-react-developer-jobs?k=react.js%2C%20react%20developer&nignbevent_src=jobsearchDeskGNB&experience=1&jobAge=1&functionAreaIdGid=5&ctcFilter=6to10&glbl_qcrc=1028"
+# python job url
+JOB_URL = "https://www.naukri.com/python-developer-django-developer-ai-ml-agent-ai-jobs?k=python%20developer%2C%20django%20developer%2C%20ai%2C%20ml%2C%20agent%20ai&nignbevent_src=jobsearchDeskGNB&experience=1&ctcFilter=6to10&ctcFilter=10to15&ctcFilter=15to25&ctcFilter=25to50&ctcFilter=50to75&ctcFilter=75to100&ctcFilter=100to500&jobAge=1"
 
 EMAIL = os.getenv("EMAIL")              # set in GitHub Secrets
 PASSWORD = os.getenv("PASSWORD")        # set in GitHub Secrets
