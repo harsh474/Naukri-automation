@@ -18,7 +18,7 @@ COOKIES_B64 = os.getenv("COOKIES_B64")  # optional: base64(pickle of cookies)
 
 # Optional: local file fallback when running locally
 COOKIE_FILE = "naukri_cookies.pkl"
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+# driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
 def make_driver():
      opts = Options()
