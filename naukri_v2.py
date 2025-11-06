@@ -33,9 +33,8 @@ def make_driver():
           opts.binary_location = chrome_bin
 
      service = Service(ChromeDriverManager().install())
-     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
-     return driver
+     return service
 
 
 
