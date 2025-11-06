@@ -20,16 +20,24 @@ COOKIES_B64 = os.getenv("COOKIES_B64")  # optional: base64(pickle of cookies)
 COOKIE_FILE = "naukri_cookies.pkl"
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
-def make_driver(headless=True):
-     options = Options()
-     if headless:
-          options.add_argument("--headless=new")
-     options.add_argument("--no-sandbox")
-     options.add_argument("--disable-dev-shm-usage")
-     options.add_argument("--window-size=1920,1080")
+def make_driver():
+     opts = Options()
+     # CI-safe flags
+     opts.add_argument("--headless=new")
+     opts.add_argument("--no-sandbox")
+     opts.add_argument("--disable-dev-shm-usage")
+     opts.add_argument("--window-size=1920,1080")
+     # If setup-chrome sets CHROME_PATH, point Selenium to it
+     chrome_bin = os.getenv("CHROME_PATH")
+     if chrome_bin:
+          opts.binary_location = chrome_bin
 
-     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+     service = Service(ChromeDriverManager().install())
+     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
      return driver
+
+
 
 def save_cookies_pickle(driver):
     try:
@@ -163,7 +171,7 @@ def apply_to_job(driver, link):
 def main():
     # Lazy import to keep your original import path
     
-     # driver = make_driver()
+     driver = make_driver()
     
      try:
           # Try cookies first (Secret → local file) then fallback to login
