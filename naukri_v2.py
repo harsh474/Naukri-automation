@@ -21,7 +21,7 @@ COOKIE_FILE = "naukri_cookies.pkl"
 # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
 def make_driver():
-     opts = Options()
+     options = Options()
      # CI-safe flags
      opts.add_argument("--headless=new")
      opts.add_argument("--no-sandbox")
@@ -33,7 +33,7 @@ def make_driver():
           opts.binary_location = chrome_bin
 
      service = Service()
-     driver = webdriver.Chrome(service=service, options=Options)
+     driver = webdriver.Chrome(service=service, options=options)
      return driver
 
 
