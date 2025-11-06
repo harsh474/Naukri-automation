@@ -33,7 +33,7 @@ def make_driver():
           opts.binary_location = chrome_bin
 
      service = Service()
-     driver = webdriver.Chrome(service=service, options=options)
+     driver = webdriver.Chrome(service=service, options=Options)
      return driver
 
 
