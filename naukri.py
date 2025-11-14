@@ -10,7 +10,7 @@ import os
 # Update with your credentials
 EMAIL = "harshrajput1101@gmail.com"
 PASSWORD = "vDX9#qK8K.uvY4f"
-JOB_URL = "https://www.naukri.com/react-dot-js-react-developer-jobs?k=react.js%2C%20react%20developer&nignbevent_src=jobsearchDeskGNB&experience=1&jobAge=1&functionAreaIdGid=5&ctcFilter=6to10&glbl_qcrc=1028"
+JOB_URL = "https://www.naukri.com/django-python-ai-jobs?k=django%2C%20python%2C%20ai&experience=1&nignbevent_src=jobsearchDeskGNB"
 COOKIE_FILE = "naukri_cookies.pkl"
 
 # Setup Chrome
